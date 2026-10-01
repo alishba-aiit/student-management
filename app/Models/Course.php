@@ -1,32 +1,31 @@
 <?php
 
 namespace App\Models;
-
-use App\Models\Course;
-use App\Models\User;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Course extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'email',
-        'user_id',
+        'code',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-   public function courses()
+public function students()
 {
     return $this->belongsToMany(
-        Course::class,
+        Student::class,
         'student_course'
     );
 }
+public function teachers()
+{
+    return $this->belongsToMany(
+        Teacher::class,
+        'course_teacher'
+    );
 }
+    }

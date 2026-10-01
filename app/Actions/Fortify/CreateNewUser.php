@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Actions\Fortify;
-
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -27,16 +26,17 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        $user = User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-        ]);
+       $user = User::create([
+    'name' => $input['name'],
+    'email' => $input['email'],
+    'password' => Hash::make($input['password']),
+    'role' => 'student',
+]);
 
         $user->student()->create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-        ]);
+    'name' => $input['name'],
+    'email' => $input['email'],
+]);
 
         return $user;
     }

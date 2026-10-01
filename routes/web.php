@@ -19,7 +19,7 @@ Route::post('/students', [StudentController::class, 'store'])
 Route::get('/students/{id}', [StudentController::class, 'show'])
     ->whereNumber('id')
     ->name('students.show');
-
-Route::middleware(['auth', 'admin'])->get('/admin', function () {
+    
+Route::middleware(['auth', 'role:admin'])->get('/admin', function () {
     return 'Admin Dashboard';
 });
